@@ -40,6 +40,11 @@ app.get("/", (req, res) => {
 app.get("/notes", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
+
+// Wildcard route to direct users back to the homepage
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 /******************************************/
 /* Database Connections */
 /******************************************/
