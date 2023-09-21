@@ -1,8 +1,8 @@
 /******************************************/
 /* External dependencies */
 /******************************************/
-const { urlencoded } = require("body-parser");
 const express = require("express");
+const path = require("path");
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
@@ -31,7 +31,10 @@ app.use(express.static("public"));
 /******************************************/
 /* Route Definitions */
 /******************************************/
-
+// GET Route for homepage
+app.get("/", (req, res) => {
+	res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 /******************************************/
 /* Database Connections */
 /******************************************/
@@ -43,3 +46,7 @@ app.use(express.static("public"));
 /******************************************/
 /* Main Logic */
 /******************************************/
+// Listening to PORT
+app.listen(PORT, () => {
+	console.log(`Listening on PORT ${PORT}`);
+});
