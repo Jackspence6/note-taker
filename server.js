@@ -1,11 +1,13 @@
 /******************************************/
 /* External dependencies */
 /******************************************/
-
+const { urlencoded } = require("body-parser");
+const express = require("express");
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
-
+const app = express();
+const PORT = process.env.PORT || 3001;
 /******************************************/
 /* Function Declarations */
 /******************************************/
@@ -21,7 +23,11 @@
 /******************************************/
 /* Middleware Definitions */
 /******************************************/
-
+// Express middleware for parsing JSON and urlencoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Serve static content for the app from the “public” directory
+app.use(express.static("public"));
 /******************************************/
 /* Route Definitions */
 /******************************************/
