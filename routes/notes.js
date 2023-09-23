@@ -31,7 +31,7 @@ const router = express.Router();
 // GET Route for /api/notes
 router.get("/", (req, res) => {
 	let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
-	res.json(notes);
+	res.json({ notes });
 });
 
 // POST Route for /api/notes
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
 	fs.writeFileSync("./db/db.json", JSON.stringify(notes));
 
 	// Returning the new note to the client
-	res.json(newNote);
+	res.json({ newNote });
 });
 /******************************************/
 /* Database Connections */
