@@ -4,7 +4,7 @@
 const express = require("express");
 const path = require("path");
 const notesRoutes = require("./routes/notes");
-const fs = require("fs");
+const fs = require('fs-extra');
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
