@@ -3,7 +3,7 @@
 /******************************************/
 const notes = require("express").Router();
 const fs = require("fs");
-var uniqueid = require("uniqueid");
+const { v4: uuidv4 } = require('uuid');
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
