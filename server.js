@@ -4,6 +4,7 @@
 const express = require("express");
 const path = require("path");
 const notesRoutes = require("./routes/notes");
+const fs = require("fs");
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
@@ -47,21 +48,30 @@ app.get("*", (req, res) => {
 });
 
 // Delete Route for /api/note/:id
-app.delete("/api/note/:id", (req, res) => {
-	// Read the existing notes from db.json file
-	let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
+app.delete("/api/note/:id", async (req, res) => {
+	try {
+		// Read the existing notes from db.json file
+		let notes = JSON.parse(await fs.promises.readFile("./db/db.json", "utf-8"));
 
-	// Finding the correct note to delete
-	const noteId = req.params.id;
+		// Finding the correct note to delete
+		const noteId = req.params.id;
 
-	// Filtering out the note with the given id
-	const filteredNotes = notes.filter((note) => note.id !== noteId);
+		// Filtering out the note with the given id
+		const filteredNotes = notes.filter((note) => note.id !== noteId);
 
-	// Write the filtered notes back to the db.json file
-	fs.writeFileSync("./db/db.json", JSON.stringify(filteredNotes), "utf-8");
+		// Write the filtered notes back to the db.json file
+		await fs.promises.writeFile(
+			"./db/db.json",
+			JSON.stringify(filteredNotes),
+			"utf-8"
+		);
 
-	// Send back a success response
-	res.status(200).send("Note deleted successfully");
+		// Send back a success response
+		res.status(200).send("Note deleted successfully");
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Internal Server Error");
+	}
 });
 /******************************************/
 /* Database Connections */
