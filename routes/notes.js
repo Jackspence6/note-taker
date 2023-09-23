@@ -44,6 +44,8 @@ router.post("/", (req, res) => {
 		text: req.body.text,
 		id: uuidv4(),
 	};
+	// Pushed the new note into the current notes
+	notes.push(newNote);
 });
 /******************************************/
 /* Database Connections */
