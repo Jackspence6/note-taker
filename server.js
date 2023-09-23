@@ -3,6 +3,7 @@
 /******************************************/
 const express = require("express");
 const path = require("path");
+const notesRoutes = require("./routes/notes");
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
@@ -23,11 +24,10 @@ const PORT = process.env.PORT || 3001;
 /******************************************/
 /* Middleware Definitions */
 /******************************************/
-// Express middleware for parsing JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Serve static content for the app from the “public” directory
 app.use(express.static("public"));
+app.use("/api/notes", notesRoutes);
 /******************************************/
 /* Route Definitions */
 /******************************************/
@@ -36,12 +36,12 @@ app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
-// GET Route for notes page
+// GET Route for /notes
 app.get("/notes", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
-// Wildcard route to direct users back to the homepage
+// GET Route for wildcard path
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/index.html"));
 });
@@ -52,11 +52,7 @@ app.get("*", (req, res) => {
 /******************************************/
 /* Server Initialization */
 /******************************************/
-
-/******************************************/
-/* Main Logic */
-/******************************************/
-// Listening to PORT
+// Listen to PORT for api calls
 app.listen(PORT, () => {
 	console.log(`Listening on PORT ${PORT}`);
 });

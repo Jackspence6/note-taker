@@ -1,13 +1,13 @@
 /******************************************/
 /* External dependencies */
 /******************************************/
-const notes = require("express").Router();
+const express = require("express");
 const fs = require("fs");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 /******************************************/
 /* Environment Variables and Constants */
 /******************************************/
-
+const router = express.Router();
 /******************************************/
 /* Function Declarations */
 /******************************************/
@@ -27,7 +27,11 @@ const { v4: uuidv4 } = require('uuid');
 /******************************************/
 /* Route Definitions */
 /******************************************/
-
+// GET Route for /api/notes
+router.get("/", (req, res) => {
+	const notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
+	res.json(notes);
+});
 /******************************************/
 /* Database Connections */
 /******************************************/
@@ -39,3 +43,5 @@ const { v4: uuidv4 } = require('uuid');
 /******************************************/
 /* Main Logic */
 /******************************************/
+// Exporting Router
+module.exports = router;
