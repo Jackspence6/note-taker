@@ -50,6 +50,9 @@ router.post("/", (req, res) => {
 
 	// Writing the new notes array into a file
 	fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+
+	// Returning the new note to the client
+	res.json(newNote);
 });
 /******************************************/
 /* Database Connections */
