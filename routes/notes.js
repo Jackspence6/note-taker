@@ -44,8 +44,12 @@ router.post("/", (req, res) => {
 		text: req.body.text,
 		id: uuidv4(),
 	};
+
 	// Pushed the new note into the current notes
 	notes.push(newNote);
+
+	// Writing the new notes array into a file
+	fs.writeFileSync("./db/db.json", JSON.stringify(notes));
 });
 /******************************************/
 /* Database Connections */
