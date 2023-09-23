@@ -3,6 +3,7 @@
 /******************************************/
 const express = require("express");
 const fs = require("fs");
+const { title } = require("process");
 const { v4: uuidv4 } = require("uuid");
 /******************************************/
 /* Environment Variables and Constants */
@@ -29,8 +30,20 @@ const router = express.Router();
 /******************************************/
 // GET Route for /api/notes
 router.get("/", (req, res) => {
-	const notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
+	let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
 	res.json(notes);
+});
+
+// POST Route for /api/notes
+router.post("/", (req, res) => {
+	let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf-8"));
+
+	// Creating a note object
+	const newNote = {
+		title: req.body.title,
+		text: req.body.text,
+		id: uuidv4(),
+	};
 });
 /******************************************/
 /* Database Connections */
