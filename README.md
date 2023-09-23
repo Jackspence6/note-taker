@@ -12,7 +12,7 @@ To run this application locally or deploy it to Heroku, follow these steps:
 2. Run `npm install` to install the necessary dependencies.
 3. Create a `db.json` file in the root directory to store note data.
 4. Start the application using `npm start`.
-5. Open your web browser and navigate to `http://localhost:3000` to use the Note Taker app.
+5. Open your web browser and navigate to `http://localhost:3001` to use the Note Taker app.
 
 ## Features
 
