@@ -23,7 +23,7 @@ To run this application locally or deploy it to Heroku, follow these steps:
 
 ## Deployment
 
-The live application can be accessed at [Heroku - Note Taker](https://your-heroku-app-url.com/).
+The live application can be accessed at [Heroku - Note Taker](https://jackspence6-note-taker-554504fe6b0f.herokuapp.com/).
 
 ## License
 
